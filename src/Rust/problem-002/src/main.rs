@@ -13,6 +13,8 @@ mod tests {
     }
 }
 
+// TODO: Generate the fibonacci numbers using an interator
+
 fn sum_even_fibonacci_numbers(limit: i32) -> i32 {
     // What we're after!
     let mut sum : i32 = 0;

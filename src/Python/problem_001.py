@@ -8,16 +8,22 @@
 import sys
 
 def test_solution(input, expected_result):
-    result = sum_all_multiples(input)
-    assert result == expected_result, "Test FAILED, expected: " + str(expected_result) + ", got: " + str(result)
-    print("Test Ok, sum_all_multiples(%s) == %s" % (input, expected_result))
+    result = sum_all_multiples_of_3_or_5_until(input)
+    assert result == expected_result, " Test FAILED, expected: " + str(expected_result) + ", got: " + str(result)
 
 def test_solutions():
     test_solution(10, 23)
     test_solution(1000, 233168)
     print("All Tests OK")
 
-def sum_all_multiples(ceiling):
+def sum_all_multiples_of_3_or_5_until(ceiling):
+    from functools import reduce
+    multiples_of_3_or_5 = filter(lambda x: x % 3 == 0 or x % 5 == 0, range(ceiling))
+    return reduce(lambda x, y: x + y, multiples_of_3_or_5)
+
+# Does the same as `sum_all_multiples_of_3_or_5` but
+# using loops instead of high order functions.
+def alt_sum_all_multiples_of_3_or_5_until(ceiling):
     sum = 0
     for n in range(ceiling):
         if n % 3 == 0 or n % 5 == 0:
@@ -56,7 +62,7 @@ def main():
             print("        --help  : Show this help")
             return
 
-    result = sum_all_multiples(ceiling)
+    result = sum_all_multiples_of_3_or_5_until(ceiling)
     print(result)
 
 if __name__ == '__main__':

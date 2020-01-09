@@ -7,6 +7,8 @@
 
 import sys
 
+DEFAULT_INPUT = 1000
+
 def test_solution(input, expected_result):
     result = sum_all_multiples_of_3_or_5_until(input)
     assert result == expected_result, " Test FAILED, expected: " + str(expected_result) + ", got: " + str(result)
@@ -31,12 +33,10 @@ def alt_sum_all_multiples_of_3_or_5_until(ceiling):
     return sum
 
 def main():
-    default_input = 1000
-
     # Check for any command line argument
-    if len(sys.argv) - 1 == 0:
+    if len(sys.argv) == 1:
         # No argument? Default it!
-        ceiling = default_input
+        ceiling = DEFAULT_INPUT
     else:
         # Even if there are more than one
         # arguments, we only care about the
@@ -56,7 +56,7 @@ def main():
             print("Usage:")
             print("     %s {[arg]|option}" % sys.argv[0])
             print("Where:")
-            print("    arg: The ceiling used by the algorithm. Default: %d" % default_input)
+            print("    arg: The ceiling used by the algorithm. Default: %d" % DEFAULT_INPUT)
             print("    option:")
             print("        --test  : Run the unit tests")
             print("        --help  : Show this help")

@@ -87,13 +87,13 @@ def time_performance():
              (sum_even_fibonacci_numbers_loop_with_iterator, "Loop + Iterator")]
 
     print("-- Running %d tests --" % number_of_tests)
-    print("-- (Result for each is total time spent per test) -- ")
+    print("-- (Result for each is the total time spent per test) -- ")
     for (test_function, test_name) in tests:
         print("%s = %s " % (test_name, str(timeit.timeit(test_function, number=number_of_tests))))
 
 def main():
     # Check for any command line argument
-    if len(sys.argv) - 1 == 0:
+    if len(sys.argv) == 1:
         # No argument? Default it!
         ceiling = DEFAULT_INPUT
     else:

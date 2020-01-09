@@ -7,6 +7,29 @@
 # find the sum of the even-valued terms.
 
 import sys
+import timeit
+
+DEFAULT_INPUT = 4000000
+
+class Fibonacci:
+  def __iter__(self):
+    self.a = 0
+    self.b = 1
+    return self
+
+  def __next__(self):
+    new_number = self.a + self.b
+    self.a = self.b
+    self.b = new_number
+    return self.b
+
+def test_solution(input, expected_result):
+    result = sum_even_fibonacci_numbers_loop_with_calculator(input)
+    assert result == expected_result, " Test FAILED, expected: " + str(expected_result) + ", got: " + str(result)
+
+def test_solutions():
+    test_solution(4000000, 4613732)
+    print("All Tests OK")
 
 def generate_fibonacci_numbers(ceiling):
     fib_numbers = [0, 1]
@@ -19,14 +42,89 @@ def generate_fibonacci_numbers(ceiling):
         fib_numbers.append(new_number)
     return fib_numbers
 
-def sum_even_fibonacci_numbers(ceiling):
+def sum_even_fibonacci_numbers_high_order(ceiling = DEFAULT_INPUT):
     from functools import reduce
     numbers = generate_fibonacci_numbers(ceiling)
     even_numbers = filter(lambda x: x % 2 == 0, numbers)
     return reduce(lambda x, y: x + y, even_numbers)
 
+def sum_even_fibonacci_numbers_loop_with_cache(ceiling = DEFAULT_INPUT):
+    numbers = generate_fibonacci_numbers(ceiling)
+    sum = 0
+    for number in numbers:
+        if number % 2 == 0:
+            sum += number
+    return sum
+
+def sum_even_fibonacci_numbers_loop_with_calculator(ceiling = DEFAULT_INPUT):
+    sum = 0
+    previous = 0
+    current = 1
+    while current < ceiling:
+        new_number = previous + current
+        previous = current
+        current = new_number
+        if current % 2 == 0:
+            sum += current
+    return sum
+    
+def sum_even_fibonacci_numbers_loop_with_iterator(ceiling = DEFAULT_INPUT):
+    sum = 0
+    sequence = Fibonacci()
+    for current in iter(sequence):
+        if current % 2 == 0:
+            sum += current
+        if current >= ceiling:
+            break
+    return sum
+
+def time_performance():
+    number_of_tests = 100000
+
+    tests = [(sum_even_fibonacci_numbers_loop_with_calculator, "Loop"),
+             (sum_even_fibonacci_numbers_loop_with_cache, "Loop + Cache"),
+             (sum_even_fibonacci_numbers_high_order, "High Order + Cache"),
+             (sum_even_fibonacci_numbers_loop_with_iterator, "Loop + Iterator")]
+
+    print("-- Running %d tests --" % number_of_tests)
+    print("-- (Result for each is total time spent per test) -- ")
+    for (test_function, test_name) in tests:
+        print("%s = %s " % (test_name, str(timeit.timeit(test_function, number=number_of_tests))))
+
 def main():
-    result = sum_even_fibonacci_numbers(4000000)
+    # Check for any command line argument
+    if len(sys.argv) - 1 == 0:
+        # No argument? Default it!
+        ceiling = DEFAULT_INPUT
+    else:
+        # Even if there are more than one
+        # arguments, we only care about the
+        # first one, so let's continue.
+
+        if sys.argv[1].isnumeric():
+            ceiling = int(sys.argv[1])
+        elif sys.argv[1] == '--test':
+            test_solutions()
+            return
+        elif sys.argv[1] == '--time':
+            time_performance()
+            return
+        elif sys.argv[1] != '--help':
+                print("Unknown option %s" % sys.argv[1])
+                print("usage: %s {[arg]|option}" % sys.argv[0])
+                print("Try `%s --help' for more information." % sys.argv[0])
+                return
+        else:
+            print("Usage:")
+            print("     %s {[arg]|option}" % sys.argv[0])
+            print("Where:")
+            print("    arg: The ceiling used by the algorithm. Default: %d" % DEFAULT_INPUT)
+            print("    option:")
+            print("        --test  : Run the unit tests")
+            print("        --time  : Measure the performance of different solutions to the problem")
+            print("        --help  : Show this help")
+            return
+    result = sum_even_fibonacci_numbers_loop_with_calculator(ceiling)
     print(result)
 
 if __name__ == '__main__':

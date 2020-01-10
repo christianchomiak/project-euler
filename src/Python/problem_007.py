@@ -15,7 +15,7 @@ def time_performance():
 
     tests = [(find_nth_prime_number, "Loop"),
              (find_nth_prime_number_list, "List"),
-             (find_nth_prime_number_iter, "Iter")]
+             (find_nth_prime_number_iter, "Iterator")]
 
     print("-- Running %d tests --" % number_of_tests)
     print("-- (Result for each is the total time spent per test) -- ")

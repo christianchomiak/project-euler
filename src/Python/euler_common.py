@@ -31,5 +31,19 @@ def is_prime(number):
         i += 2
     return True
 
+def get_first_n_primes(n):
+    if n == 0:
+        return []
+    if n == 1:
+        return [2]
+    primes = [2, 3]
+    if n > 2:
+        for _ in range(3, n + 1):
+            current = primes[-1] + 2
+            while not is_prime(current):
+                current += 2
+            primes.append(current)
+    return primes
+
 def is_palindrome(string):
     return string == string[::-1]

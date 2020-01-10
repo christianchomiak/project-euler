@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# PROBLEM #3
+# PROBLEM 3
 # The prime factors of 13195 are 5, 7, 13 and 29.
 # What is the largest prime factor of the number 600851475143?
 
@@ -77,7 +77,7 @@ def main():
             print("Usage:")
             print("     %s {[arg]|option}" % sys.argv[0])
             print("Where:")
-            print("    arg: The ceiling used by the algorithm. Default: %d" % DEFAULT_INPUT)
+            print("    arg: The number whose largest prime factor will be calculated. Default: %d" % DEFAULT_INPUT)
             print("    option:")
             print("        --test  : Run the unit tests")
             print("        --time  : Measure the performance of different solutions to the problem")

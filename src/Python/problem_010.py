@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# [PROBLEM #10]
+# PROBLEM 10
 # The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 # Find the sum of all the primes below two million.
 
@@ -83,8 +83,7 @@ def main():
             print("Usage:")
             print("     %s {[arg]|option}" % sys.argv[0])
             print("Where:")
-            # TODO: Add argument description here
-            print("    arg: <Argument Description>. Default: %d" % DEFAULT_INPUT)
+            print("    arg: The ceiling used by the algorithm. Default: %d" % DEFAULT_INPUT)
             print("    option:")
             print("        --test  : Run the unit tests")
             print("        --time  : Measure the performance of different solutions to the problem")

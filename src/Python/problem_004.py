@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# PROBLEM #4
+# PROBLEM 4
 # A palindromic number reads the same both ways.
 # The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 # Find the largest palindrome made from the product of two 3-digit numbers.
@@ -68,8 +68,7 @@ def main():
             print("Usage:")
             print("     %s {[arg]|option}" % sys.argv[0])
             print("Where:")
-            # TODO: Add argument description here
-            print("    arg: <Argument Description>. Default: %d" % DEFAULT_INPUT)
+            print("    arg: Number of digits desired. Default: %d" % DEFAULT_INPUT)
             print("    option:")
             print("        --test  : Run the unit tests")
             print("        --time  : Measure the performance of different solutions to the problem")
